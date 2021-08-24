@@ -7,35 +7,35 @@ function parse(input) {
     let result = input
         // Exponents
         .replace(
-            /([^0-9.]-)?([0-9]+)\^(-?[0-9]+)/g,
+            /([^0-9.]-)?([0-9.]+)\^(-?[0-9.]+)/g,
             (_, isNegative, base, exponent) => 
                 `${isNegative ? isNegative.substring(0,1) : ''}${parseFloat(isNegative ? `-${base}` : base) ** parseFloat(exponent)}`
         )
 
         // Multiplication
         .replace(
-            /([^0-9.]-)?([0-9]+)\*(-?[0-9]+)/g,
+            /([^0-9.]-)?([0-9.]+)\*(-?[0-9.]+)/g,
             (_, isNegative, factorA, factorB) => 
                 `${isNegative ? isNegative.substring(0,1) : ''}${parseFloat(isNegative ? `-${factorA}` : factorA) * parseFloat(factorB)}`
         )
 
         // Division
         .replace(
-            /([^0-9.]-)?([0-9]+)\/(-?[0-9]+)/g,
+            /([^0-9.]-)?([0-9.]+)\/(-?[0-9.]+)/g,
             (_, isNegative, factorA, factorB) => 
                 `${isNegative ? isNegative.substring(0,1) : ''}${parseFloat(isNegative ? `-${factorA}` : factorA) / parseFloat(factorB)}`
             )
 
         // Addition
         .replace(
-            /([^0-9.]-)?([0-9]+)\+(-?[0-9]+)/g,
+            /([^0-9.]-)?([0-9.]+)\+(-?[0-9.]+)/g,
             (_, isNegative, termA, termB) => 
                 `${isNegative ? isNegative.substring(0,1) : ''}${parseFloat(isNegative ? `-${termA}` : termA) + parseFloat(termB)}`
             )
 
         // Subtraction
         .replace(
-            /([^0-9.]-)?([0-9]+)\-(-?[0-9]+)/g,
+            /([^0-9.]-)?([0-9.]+)\-(-?[0-9.]+)/g,
             (_, isNegative, termA, termB) => 
                 `${isNegative ? isNegative.substring(0,1) : ''}${parseFloat(isNegative ? `-${termA}` : termA) - parseFloat(termB)}`
         )
