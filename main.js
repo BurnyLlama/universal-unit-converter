@@ -33,7 +33,7 @@ textbox.addEventListener("input",
                 (_, termA, termB) => parseInt(termA) - parseInt(termB)
             )
 
-        infoText.innerHTML = `Result: ${result}`
+        infoText.innerHTML = `Result: ${input ? result : '(No statement)'}`
         console.log({ input, result })
     }
 )
