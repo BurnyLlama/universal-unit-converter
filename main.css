@@ -31,7 +31,7 @@ h1 {
     font-family: 'Fira Mono', monospace;
     font-size: 1.25rem;
 
-    height: 50vh;
+    height: 30vh;
     padding: 1rem;
 
     border: 2px solid #282828;
@@ -57,4 +57,20 @@ h1 {
 
 #info-text {
     margin-top: 1.25rem;
+}
+
+.instructions {
+    margin-top: 2rem;
+    font-size: .95rem;
+}
+
+table {
+    width: max-content;
+    margin: 1rem 0;
+}
+
+td, th {
+    padding: .2rem 1rem;
+    font-size: .95rem;
+    text-align: left;
 }

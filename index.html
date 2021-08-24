@@ -14,10 +14,45 @@
     <textarea name="textbox" id="textbox"></textarea>
     <p id="info-text">Result: (No statement)</p>
     <p class="instructions">
-        <i>
-            Type any statement into the textbox above and it will be calculated and the result will be displayed above. <br>
-            As of now, only the addition, subtraction, multiplication, and division are supported. (It does follow the order of operations.)
-        </i>
+        Type any statement into the textbox above and it will be calculated and the result will be displayed above. <br>
+        As of now, only addition, subtraction, multiplication, division, and exponents are supported. (It does follow the order of operations.) <br>
+        It also supports prefixes:
+        <table>
+            <thead>
+                <tr>
+                    <th>Prefix</th>
+                    <th>Long name</th>
+                    <th>Factor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>m</td>
+                    <td>milli</td>
+                    <td>0.001</td>
+                </tr>
+                <tr>
+                    <td>c</td>
+                    <td>centi</td>
+                    <td>0.01</td>
+                </tr>
+                <tr>
+                    <td>d</td>
+                    <td>deci</td>
+                    <td>0.1</td>
+                </tr>
+                <tr>
+                    <td>h</td>
+                    <td>hecto</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>k or K</td>
+                    <td>kilo</td>
+                    <td>1000</td>
+                </tr>
+            </tbody>
+        </table>
     </p>
 </body>
 </html>
