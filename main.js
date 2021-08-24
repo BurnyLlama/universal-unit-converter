@@ -5,6 +5,13 @@ const infoText = document.querySelector("#info-text")
 
 function parse(input) {
     let result = input
+        // Exponents
+        .replace(
+            /([^0-9.]-)?([0-9]+)\^(-?[0-9]+)/g,
+            (_, isNegative, base, exponent) => 
+                `${isNegative ? isNegative.substring(0,1) : ''}${parseFloat(isNegative ? `-${base}` : base) ** parseFloat(exponent)}`
+        )
+
         // Multiplication
         .replace(
             /([^0-9.]-)?([0-9]+)\*(-?[0-9]+)/g,
@@ -43,7 +50,7 @@ function parse(input) {
 textbox.addEventListener("input",
     event => {
         // Remove all whitespace from the input and replace commas with periods. Also remove any trailing operators.
-        let input = textbox.value.replace(/\s+/g, "").replace(",", ".").replace(/[\+\-\*\/]$/, "")
+        let input = textbox.value.replace(/\s+/g, "").replace(",", ".").replace(/[\+\-\*\/]*$/, "")
 
         // Replace prefixes with their corresponfing factor
         input = input.replace(/[a-zA-Z]/g, match => prefixes[match] ? `*${prefixes[match]}` : '')
