@@ -53,7 +53,7 @@ textbox.addEventListener("input",
         let input = textbox.value.replace(/\s+/g, "").replace(",", ".").replace(/[\+\-\*\/]*$/, "")
 
         // Replace prefixes with their corresponfing factor
-        input = input.replace(/[a-zA-Z]/g, match => prefixes[match] ? `*${prefixes[match]}` : '')
+        input = input.replace(/[a-zA-Z]/g, match => prefixes[match] ? `${prefixes[match]}` : '')
 
         // Parse the input
         const result = parse(input)
