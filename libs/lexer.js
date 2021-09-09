@@ -17,6 +17,10 @@ export function lexer(string) {
         let forwardCursor = cursor + 1
         let forwardMatch = cursorMatch
 
+        if (!cursorMatch.success) {
+            return `Error at "${char}": Unrecognized/invalid character!`
+        }
+
         // Read ahead until the 'forwardString' is no longer valid to the current token type.
         while (cursorMatch.type === forwardMatch.type) {
             const forwardString = string.substring(cursor, forwardCursor)
