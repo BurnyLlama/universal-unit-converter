@@ -4,10 +4,7 @@ import { simpleGrammar, grammarMatch } from "./grammar.js"
 /* 
     Reference: https://github.com/peter-leonov/picojs/blob/main/lexer.js 
 */
-
-export function lexer(string) {
-    string = string.replace(/\s/g, "")
-
+function simplePass(string) {
     let tokens = []
     let cursor = 0
     while (cursor < string.length) {
@@ -30,7 +27,7 @@ export function lexer(string) {
                 const latestValidToken = string.substring(cursor, forwardCursor - 1)
                 const latestValidMatch = grammarMatch(latestValidToken, simpleGrammar)
                 tokens.push(
-                    token.createSimple(
+                    token.create(
                         latestValidMatch.type,
                         latestValidToken
                     )
@@ -44,4 +41,12 @@ export function lexer(string) {
     }
 
     return tokens
+}
+
+export function lexer(string) {
+    string = string.replace(/\s/g, "")
+
+    const simpleTokens = simplePass(string)
+
+    return { simpleTokens }
 }

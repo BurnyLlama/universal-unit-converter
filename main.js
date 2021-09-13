@@ -1,14 +1,18 @@
 import { prefixes } from "./libs/prefixes.js"
 import { lexer } from "./libs/lexer.js"
+import { parser } from "./libs/parser.js"
 
 const textbox = document.querySelector("#textbox")
 const infoText = document.querySelector("#info-text")
 
 textbox.addEventListener("input",
     event => {
-        const result = lexer(textbox.value)
-        console.log(result)
+        const lexed = lexer(textbox.value)
+        console.log(lexed)
 
-        infoText.innerHTML = result.toString()
+        const parsed = parser(lexed)
+        console.log(parsed)
+
+        infoText.innerHTML = lexed.toString()
     }
 )
