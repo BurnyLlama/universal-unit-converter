@@ -16,7 +16,7 @@ export const simpleGrammar = [
         regex: /^\-$/
     },
     {
-        type: "MULTIPLICATION",
+        type: "TIMES",
         regex: /^\*$/
     },
     {
@@ -43,27 +43,6 @@ export function grammarMatch(string, ruleset) {
             return {
                 success: true,
                 type: rule.type
-            }
-        }
-    }
-
-    return {
-        success: false
-    }
-}
-
-export function complexGrammarMatch(array, ruleset) {
-    for (const i in ruleset) {
-        const rule = ruleset[i]
-
-        if (
-            array[0] === rule.rule[0] &&
-            array[1] === rule.rule[1] &&
-            array[2] === rule.rule[2]
-        ) {
-            return {
-                type: rule.type,
-                success: true
             }
         }
     }

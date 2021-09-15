@@ -43,10 +43,30 @@ function simplePass(string) {
     return tokens
 }
 
+function advancedPass(simpleTokens) {
+    for (const i in simpleTokens) {
+        const token = simpleTokens[i]
+
+        switch (token.type) {
+            case "NUMBER":
+                token.value = parseInt(token.value)
+                break
+
+            default:
+                break
+        }
+
+        // simpleTokens[i] = token
+    }
+
+    return simpleTokens
+}
+
 export function lexer(string) {
     string = string.replace(/\s/g, "")
 
     const simpleTokens = simplePass(string)
+    const tokens = advancedPass(simpleTokens)
 
-    return { simpleTokens }
+    return tokens
 }

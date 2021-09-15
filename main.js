@@ -7,12 +7,12 @@ const infoText = document.querySelector("#info-text")
 
 textbox.addEventListener("input",
     event => {
-        const lexed = lexer(textbox.value)
-        console.log(lexed)
+        const tokens = lexer(textbox.value)
 
-        const parsed = parser(lexed)
-        console.log(parsed)
+        const tree = parser(tokens)
 
-        infoText.innerHTML = lexed.toString()
+        console.log({ tokens, tree })
+
+        infoText.innerHTML = tokens.toString()
     }
 )
