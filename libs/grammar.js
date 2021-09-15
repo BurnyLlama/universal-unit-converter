@@ -24,6 +24,10 @@ export const simpleGrammar = [
         regex: /^\/$/
     },
     {
+        type: "RAISED-BY",
+        regex: /^\^$/
+    },
+    {
         type: "DECIMAL",
         regex: /^[\.,]$/
     }
@@ -44,9 +48,12 @@ export const complexGrammar = [
     },
     {
         type: "DIVISION",
-        rule: ["NUMBER", "PLUS", "NUMBER"]
+        rule: ["NUMBER", "DIVIDE", "NUMBER"]
     },
-    
+    {
+        type: "POWER",
+        rule: ["NUMBER", "RAISED-BY", "NUMBER"]
+    },
 ]
 
 export function grammarMatch(string, ruleset) {
