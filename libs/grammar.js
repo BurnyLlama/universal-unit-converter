@@ -20,7 +20,7 @@ export const simpleGrammar = [
         regex: /^\*$/
     },
     {
-        type: "DIVISION",
+        type: "DIVIDE",
         regex: /^\/$/
     },
     {
@@ -33,7 +33,20 @@ export const complexGrammar = [
     {
         type: "ADDITION",
         rule: ["NUMBER", "PLUS", "NUMBER"]
-    }
+    },
+    {
+        type: "SUBTRACTION",
+        rule: ["NUMBER", "MINUS", "NUMBER"]
+    },
+    {
+        type: "MULTIPLICATION",
+        rule: ["NUMBER", "TIMES", "NUMBER"]
+    },
+    {
+        type: "DIVISION",
+        rule: ["NUMBER", "PLUS", "NUMBER"]
+    },
+    
 ]
 
 export function grammarMatch(string, ruleset) {

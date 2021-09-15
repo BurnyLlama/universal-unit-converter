@@ -34,7 +34,7 @@ export function parser(tokens) {
 
             ++cursor
         }
-
-        return tokens.length === 1 ? tokens[0] : tokens
     }
+
+    return tokens.length === 1 ? tokens[0] : tokens
 }
