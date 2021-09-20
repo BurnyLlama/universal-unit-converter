@@ -49,7 +49,7 @@ function advancedPass(simpleTokens) {
 
         switch (token.type) {
             case "NUMBER":
-                token.value = parseInt(token.value)
+                token.value = Number(token.value)
                 break
 
             default:

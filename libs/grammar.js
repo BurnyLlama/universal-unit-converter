@@ -5,7 +5,7 @@ export const simpleGrammar = [
     },
     {
         type: "NUMBER",
-        regex: /^[0-9]+$/
+        regex: /^[0-9\.]+$/
     },
     {
         type: "PLUS",
@@ -26,10 +26,6 @@ export const simpleGrammar = [
     {
         type: "RAISED-BY",
         regex: /^\^$/
-    },
-    {
-        type: "DECIMAL",
-        regex: /^[\.,]$/
     }
 ]
 
