@@ -26,6 +26,18 @@ export const simpleGrammar = [
     {
         type: "RAISED-BY",
         regex: /^\^$/
+    },
+    {
+        type: "START-BLOCK",
+        regex: /^\($/
+    },
+    {
+        type: "END-BLOCK",
+        regex: /^\)$/
+    },
+    {
+        type: "SEPARATOR",
+        regex: /^,$/
     }
 ]
 

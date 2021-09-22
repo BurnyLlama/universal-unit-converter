@@ -1,5 +1,6 @@
 import { token } from "./token.js"
 import { simpleGrammar, grammarMatch } from "./grammar.js"
+import { output } from "./output.js"
 
 /* 
     Reference: https://github.com/peter-leonov/picojs/blob/main/lexer.js 
@@ -15,7 +16,7 @@ function simplePass(string) {
         let forwardMatch = cursorMatch
 
         if (!cursorMatch.success) {
-            return `Error at "${char}": Unrecognized/invalid character!`
+            return output(`Error at "${char}": Unrecognized/invalid character!`, "error")
         }
 
         // Read ahead until the 'forwardString' is no longer valid to the current token type.
@@ -43,30 +44,81 @@ function simplePass(string) {
     return tokens
 }
 
-function advancedPass(simpleTokens) {
-    for (const i in simpleTokens) {
-        const token = simpleTokens[i]
+function handleBlock(tokens, cursorStart) {
+    let cursor = cursorStart + 1
+    let children = []
 
-        switch (token.type) {
+    while (tokens[cursor].type !== "END-BLOCK" && cursor < tokens.length) {
+        const token = tokens[cursor]
+
+        if (token.type === "START-BLOCK") {
+            const block = handleBlock(tokens, cursor)
+            children.push(block.children)
+            cursor = block.current
+        }
+
+        ++cursor
+    }
+
+    children.push(tokens.slice(cursorStart + 1, cursor))
+
+    return { cursor, children }
+}
+
+function advancedPass(simpleTokens) {
+    let newTokens = []
+    let cursor = 0
+
+    while (cursor < simpleTokens.length) {
+        const currentToken = simpleTokens[cursor]
+
+        switch (currentToken.type) {
             case "NUMBER":
-                token.value = Number(token.value)
+                currentToken.value = Number(currentToken.value)
+                newTokens.push(currentToken)
                 break
 
             default:
+                newTokens.push(currentToken)
                 break
         }
 
-        // simpleTokens[i] = token
+        ++cursor
     }
 
-    return simpleTokens
+    return newTokens
+}
+
+function blockPass(advancedTokens) {
+    let newTokens = []
+    let cursor = 0
+
+    while (cursor < advancedTokens.length) {
+        const currentToken = advancedTokens[cursor]
+
+        if (currentToken.type !=="START-BLOCK") {
+            const block = handleBlock(advancedTokens, cursor)
+            const [...value] = block.children
+            newTokens.push(
+                token.create("BLOCK", value)
+            )
+            cursor = block.cursor
+        } else {
+            newTokens.push(currentToken)
+        }
+
+        ++cursor
+    }
+
+    return newTokens
 }
 
 export function lexer(string) {
     string = string.replace(/\s/g, "")
 
     const simpleTokens = simplePass(string)
-    const tokens = advancedPass(simpleTokens)
+    const advancedTokens = advancedPass(simpleTokens)
+    const tokens = blockPass(advancedTokens)
 
     return tokens
 }

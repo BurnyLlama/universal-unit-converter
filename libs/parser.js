@@ -5,14 +5,14 @@ export function parser(tokens) {
     for (const i in complexGrammar) {
         const rule = complexGrammar[i]
 
-        let cursor = 1
+        let cursor = 0
         while (cursor < tokens.length) {
             const prevToken = tokens[cursor - 1]
             const currentToken = tokens[cursor]
             const nextToken = tokens[cursor + 1]
 
             if (
-                prevToken.type === rule.rule[0] &&
+                prevToken?.type === rule.rule[0] &&
                 currentToken.type === rule.rule[1] &&
                 nextToken.type === rule.rule[2]
             ) {
@@ -31,6 +31,7 @@ export function parser(tokens) {
                     ]
                 }
             }
+
 
             ++cursor
         }
