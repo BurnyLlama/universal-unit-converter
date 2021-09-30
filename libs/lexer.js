@@ -44,27 +44,6 @@ function simplePass(string) {
     return tokens
 }
 
-function handleBlock(tokens, cursorStart) {
-    let cursor = cursorStart + 1
-    let children = []
-
-    while (tokens[cursor].type !== "END-BLOCK" && cursor < tokens.length) {
-        const token = tokens[cursor]
-
-        if (token.type === "START-BLOCK") {
-            const block = handleBlock(tokens, cursor)
-            children.push(block.children)
-            cursor = block.current
-        }
-
-        ++cursor
-    }
-
-    children.push(tokens.slice(cursorStart + 1, cursor))
-
-    return { cursor, children }
-}
-
 function advancedPass(simpleTokens) {
     let newTokens = []
     let cursor = 0
@@ -87,6 +66,27 @@ function advancedPass(simpleTokens) {
     }
 
     return newTokens
+}
+
+function handleBlock(tokens, cursorStart) {
+    let cursor = cursorStart + 1
+    let children = []
+
+    while (tokens[cursor].type !== "END-BLOCK" && cursor < tokens.length) {
+        const token = tokens[cursor]
+
+        if (token.type === "START-BLOCK") {
+            const block = handleBlock(tokens, cursor)
+            children.push(block.children)
+            cursor = block.current
+        }
+
+        ++cursor
+    }
+
+    children.push(tokens.slice(cursorStart + 1, cursor))
+
+    return { cursor, children }
 }
 
 function blockPass(advancedTokens) {
@@ -118,7 +118,8 @@ export function lexer(string) {
 
     const simpleTokens = simplePass(string)
     const advancedTokens = advancedPass(simpleTokens)
-    const tokens = blockPass(advancedTokens)
+    // const tokens = blockPass(advancedTokens)
+    const tokens = advancedTokens
 
     return tokens
 }
